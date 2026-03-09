@@ -108,7 +108,8 @@ export default function Create () {
                                                 <input 
                                                     id="role-admin" 
                                                     type="radio" 
-                                                    value={form.role === 'admin'}
+                                                    value='admin'
+                                                    checked={form.role === "admin"}
                                                     name="role" 
                                                     onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
@@ -118,18 +119,20 @@ export default function Create () {
                                                 <input 
                                                     id="role-manager" 
                                                     type="radio" 
-                                                    value={form.role === 'manager'} 
-                                                    name="role" 
+                                                    value='manager' 
+                                                    name="role"
+                                                    checked={form.role === "manager"} 
                                                     onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
                                                 <label htmlFor="role-manager" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Manager</label>
                                             </div>
                                             <div className="flex items-center ps-4 rounded-base">
                                                 <input 
-                                                    defaultChecked 
+                                                    // defaultChecked 
                                                     id="role-parent" 
                                                     type="radio" 
-                                                    value={form.role === 'parent'} 
+                                                    value='parent'
+                                                    checked={form.role === "parent"} 
                                                     name="role" 
                                                     onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
