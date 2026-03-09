@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', 
     ];
 
     /**
@@ -47,7 +48,7 @@ class User extends Authenticatable
     // Parents can have many students
     public function children ()
     {
-        return $this-hasMany(Student::class, 'parent_id');
+        return $this->hasMany(Student::class, 'parent_id');
     } 
 
     // If user is admin/administrator, can create classes
