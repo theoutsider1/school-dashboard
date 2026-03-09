@@ -1,6 +1,7 @@
 import Dropdown from "@/Components/Dropdown";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
@@ -133,6 +134,11 @@ export default function Create () {
                                         </div>
                                         {errors.role && <div className="text-red-600">{errors.role}</div>}
                                     </div>
+                                </div>
+                                <div className="w-full flex justify-end">
+                                    <PrimaryButton >
+                                        Submit
+                                    </PrimaryButton>
                                 </div>
                             </form>
                           
