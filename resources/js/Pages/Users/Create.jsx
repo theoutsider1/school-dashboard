@@ -19,13 +19,13 @@ export default function Create () {
 
     const [errors, setErrors] = useState({});
     
-    const hndleChange = (e)=>{
+    const handleChange = (e)=>{
         setForm({
             ...form,
-            [e.target.name]: e.target.target
+            [e.target.name]: e.target.value
         })
     }
-    function handleSubmit() {
+    function handleSubmit(e) {
         e.preventDefault();
         Inertia.post('/users', form, {
             onError:(err)=> setErrors(err),
@@ -55,45 +55,46 @@ export default function Create () {
                                 onSubmit={handleSubmit}
                              >
                                 <div>
-                                    <InputLabel htmlForm="name" value="Name"/>
+                                    <InputLabel htmlFor="name" value="Name"/>
                                     <TextInput 
                                         id="name"
                                         name="name"
-                                        value=""
+                                        value={form.name}
                                         className="mt-1 block w-full"
-                                        autoComplet="name"
+                                        autoComplete="name"
                                         isFocused={true}
-                                        // onChange={}
+                                        onChange={handleChange}
                                         required/>
                                         <InputError 
                                         message={errors.name} 
                                         className="mt-2"/>
                                 </div>
                                 <div className="mt-4">
-                                    <InputLabel htmlForm="email" value="Email"/>
+                                    <InputLabel htmlFor="email" value="Email"/>
                                     <TextInput 
                                         id="email"
                                         name="email"
-                                        value=""
+                                        value={form.email}
                                         className="mt-1 block w-full"
-                                        autoComplet="email"
+                                        autoComplete="email"
                                         isFocused={true}
-                                        // onChange={}
+                                        onChange={handleChange}
                                         required/>
                                         <InputError 
                                         message={errors.email} 
                                         className="mt-2"/>
                                 </div>
                                 <div className="mt-4">
-                                    <InputLabel htmlForm="password" value="Password"/>
+                                    <InputLabel htmlFor="password" value="Password"/>
                                     <TextInput 
                                         id="password"
                                         name="password"
-                                        value=""
+                                        value={form.password}
+                                        type='password'
                                         className="mt-1 block w-full"
-                                        autoComplet="new-password"
+                                        autoComplete="new-password"
                                         isFocused={true}
-                                        // onChange={}
+                                        onChange={handleChange}
                                         required/>
                                         <InputError 
                                         message={errors.name} 
@@ -103,33 +104,36 @@ export default function Create () {
                                     <span>Role</span>
                                     <div className="flex flex-col ps-4">
                                         <div className="flex">
-                                            <div class="flex items-center ps-4">
+                                            <div className="flex items-center ps-4">
                                                 <input 
                                                     id="role-admin" 
                                                     type="radio" 
-                                                    value="admin"
+                                                    value={form.role === 'admin'}
                                                     name="role" 
+                                                    onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
-                                                <label for="role-admin" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Admin</label>
+                                                <label htmlFor="role-admin" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Admin</label>
                                             </div>
-                                            <div class="flex items-center ps-4 rounded-base">
+                                            <div className="flex items-center ps-4 rounded-base">
                                                 <input 
                                                     id="role-manager" 
                                                     type="radio" 
-                                                    value="manager" 
+                                                    value={form.role === 'manager'} 
                                                     name="role" 
+                                                    onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
-                                                <label for="role-manager" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Manager</label>
+                                                <label htmlFor="role-manager" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Manager</label>
                                             </div>
-                                            <div class="flex items-center ps-4 rounded-base">
+                                            <div className="flex items-center ps-4 rounded-base">
                                                 <input 
                                                     defaultChecked 
                                                     id="role-parent" 
                                                     type="radio" 
-                                                    value="parent" 
+                                                    value={form.role === 'parent'} 
                                                     name="role" 
+                                                    onChange={handleChange}
                                                     className="w-4 h-4 rounded-full focus:ring-2 focus:ring-brand"/>
-                                                <label for="role-parent" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Parent</label>
+                                                <label htmlFor="role-parent" className="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Parent</label>
                                             </div>
                                         </div>
                                         {errors.role && <div className="text-red-600">{errors.role}</div>}
