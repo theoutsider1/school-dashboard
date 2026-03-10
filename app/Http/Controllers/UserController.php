@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -30,7 +31,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => 'nullable|min:8',
             'role' => 'required|in:admin,manager,parent',
         ]);
 
@@ -57,14 +58,19 @@ class UserController extends Controller
     {
         $request-> validate([
             'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users,email,{$user->id}',
-            'role' => 'required|in:admin,manager,parent'
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+                ],
+                'role' => 'required|in:admin,manager,parent' ,
+                'password' => 'nullable|min:6',
         ]);
 
         $user->update([
-            'name' => $required->name,
-            'email'=> $required->email,
-            'role' => $required->role,
+            'name' => $request->name,
+            'email'=> $request->email,
+            'role' => $request->role,
         ]);
 
         if ($request->password) 
