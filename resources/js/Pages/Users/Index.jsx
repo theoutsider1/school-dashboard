@@ -51,9 +51,8 @@ export default function Index ({users}){
                             {user.role}
                         </td>
                         <td className="px-6 py-4">
-                            {/* <a href="#" class="font-medium text-fg-brand hover:underline">Edit</a> */}
                             <Link 
-                                // href={`/user/{user.id}/edit`}
+                                href={`/users/${user.id}/edit`}
                                 className="font-medium text-fg-brand hover:underline bg-yellow-500 text-white rounded hover:bg-yellow-600 px-2 py-1 mx-2">
                                     Edit
                             </Link>
