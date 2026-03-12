@@ -16,4 +16,11 @@ class ClasseController extends Controller
             'classes' => $classes
         ]);
     }
+
+    public function create () 
+    {
+        return Inertia::render('Classes/Create');
+    }
+
+    
 }
