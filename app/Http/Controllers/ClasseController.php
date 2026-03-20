@@ -22,5 +22,19 @@ class ClasseController extends Controller
         return Inertia::render('Classes/Create');
     }
 
+    public function store (Request $request) 
+    {
+        $validated = $request->validate([
+            'name'=> 'required|string|max:255',
+            'manager_id'=>'nullable|exists:user,id',
+         ]);
+
+        Classe::create($validated);
+
+        return redirect()
+        ->route('classes.index')
+        ->with('success', 'Classe Created Successfully');
+    }
+
     
 }
