@@ -13,7 +13,7 @@ class Classe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'namae',
+        'name',
         'manager_id',
         'created_by',
         'admin_id'
@@ -25,17 +25,22 @@ class Classe extends Model
 
             $user = Auth::user();
              // Always set admin
-            $classe->admin_id = $user->role === 'admin'
+             $classe->admin_id = $user->role === 'admin'
                 ? $user->id
                 : $user->admin_id;
+
+                $adminName = User::find($classe->admin_id)?->name ?? $user->name;
+
               // If a manager is assigned
             if ($classe->manager_id) {
                 $manager = User::find($classe->manager_id);
-                $classe->created_by = $manager ? $manager->name : null;
+
+                // Prefer manager’s name; if missing, fall back to admin name
+                $classe->created_by = $manager?->name ?? $adminName;
             } 
             // If no manager -> admin created it
             else {
-                $classe->created_by = $classe->admin_id;
+                $classe->created_by = $adminName;
             }
         });
     }
